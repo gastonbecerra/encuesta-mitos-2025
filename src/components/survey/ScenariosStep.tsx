@@ -18,6 +18,12 @@ interface ScenariosStepProps {
 
 const { scenarios } = survey;
 
+const scenarioOptions = [
+    { id: 'ia', label: 'Prefiero IA' },
+    { id: 'human', label: 'Prefiero humano' },
+    { id: 'both', label: 'Prefiero ambos' },
+];
+
 export function ScenariosStep({ onNext, onBack, updateData, initialData }: ScenariosStepProps) {
   const [responses, setResponses] = useState<ScenariosData>(initialData);
 
@@ -41,16 +47,16 @@ export function ScenariosStep({ onNext, onBack, updateData, initialData }: Scena
         </CardDescription>
       </CardHeader>
       <CardContent className="space-y-8">
-        {scenarios.map((scenario) => (
+        {scenarios.map((scenario, index) => (
           <div key={scenario.id} className="space-y-4 rounded-lg border p-4 shadow-sm">
-            <h3 className="font-semibold">{scenario.title}</h3>
-            <p className="text-sm text-muted-foreground">{scenario.description}</p>
+            <h3 className="font-semibold">Escenario {index + 1}</h3>
+            <p className="text-sm text-muted-foreground">{scenario.text}</p>
             <RadioGroup
               value={responses[scenario.id]}
               onValueChange={(value) => handleResponseChange(scenario.id, value)}
               className="space-y-2"
             >
-              {scenario.options.map(option => (
+              {scenarioOptions.map(option => (
                 <div key={option.id} className="flex items-center space-x-2">
                   <RadioGroupItem value={option.id} id={`${scenario.id}-${option.id}`} />
                   <Label htmlFor={`${scenario.id}-${option.id}`}>{option.label}</Label>
