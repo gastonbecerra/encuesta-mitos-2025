@@ -10,6 +10,7 @@ type BeliefsData = { [key: string]: string };
 
 interface BeliefsStepProps {
   onNext: () => void;
+  onBack: () => void;
   updateData: (data: { beliefs: BeliefsData }) => void;
   initialData: BeliefsData;
 }
@@ -30,7 +31,7 @@ const likertOptions = [
   { id: 'sa', label: 'Strongly Agree' },
 ];
 
-export function BeliefsStep({ onNext, updateData, initialData }: BeliefsStepProps) {
+export function BeliefsStep({ onNext, onBack, updateData, initialData }: BeliefsStepProps) {
   const [responses, setResponses] = useState<BeliefsData>(initialData);
 
   const handleResponseChange = (statementId: string, value: string) => {
@@ -71,8 +72,11 @@ export function BeliefsStep({ onNext, updateData, initialData }: BeliefsStepProp
           </div>
         ))}
       </CardContent>
-      <CardFooter>
-        <Button onClick={handleNextClick} disabled={!isComplete} className="ml-auto">
+      <CardFooter className="flex justify-between">
+        <Button variant="outline" onClick={onBack}>
+          Back
+        </Button>
+        <Button onClick={handleNextClick} disabled={!isComplete}>
           Next
         </Button>
       </CardFooter>
