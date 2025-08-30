@@ -83,8 +83,7 @@ export default function Home() {
       <div className="flex min-h-screen w-full flex-col items-center bg-background p-4 sm:p-6 lg:p-8">
         <div className="w-full max-w-4xl space-y-8">
           <header className="text-center">
-            <h1 className="text-4xl font-headline font-bold text-primary">Ethical Compass</h1>
-            <p className="mt-2 text-muted-foreground">Una encuesta sobre ética en IA y vos</p>
+            <h1 className="text-3xl font-headline font-semibold text-primary">Creencias y actitudes sobre la Inteligencia Artificial</h1>
           </header>
 
           {currentStep > 1 && currentStep <= displaySteps.length + 1 && (
@@ -97,8 +96,8 @@ export default function Home() {
           <footer className="border-t border-border pt-8 mt-12 text-center text-muted-foreground">
             <div className="container mx-auto px-4 text-sm">
                 <p className="font-semibold">Proyecto de Investigación: "Incorporación de la IA en el aula" (2023-2026)</p>
-                <p>Unidad: Licenciatura en Sociología, Facultad de Psicología y Ciencias Sociales, Universidad de Flores (Argentina)</p>
-                <p>Contacto del equipo de investigación: gaston.becerra@uflouniversidad.edu.ar</p>
+                <p>Licenciatura en Sociología <br/> Facultad de Psicología y Ciencias Sociales <br/> Universidad de Flores (Argentina)</p>
+                <p>Contacto: gaston.becerra@uflouniversidad.edu.ar</p>
             </div>
           </footer>
         </div>
