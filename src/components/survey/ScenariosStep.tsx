@@ -37,6 +37,12 @@ export function ScenariosStep({ onNext, onBack, updateData, initialData }: Scena
   };
   
   const isComplete = Object.keys(responses).length === scenarios.length;
+  
+  const incompleteScenarioNumbers = scenarios
+    .map((scenario, index) => ({ id: scenario.id, number: index + 1 }))
+    .filter(item => !responses.hasOwnProperty(item.id))
+    .map(item => item.number);
+
 
   return (
     <Card>
@@ -49,8 +55,7 @@ export function ScenariosStep({ onNext, onBack, updateData, initialData }: Scena
       <CardContent className="space-y-8">
         {scenarios.map((scenario, index) => (
           <div key={scenario.id} className="space-y-4 rounded-lg border p-4 shadow-sm">
-            <h3 className="font-semibold">Escenario {index + 1}</h3>
-            <p className="text-sm text-muted-foreground">{scenario.text}</p>
+            <h3 className="font-semibold">{index + 1}.{scenario.text}</h3>
             <RadioGroup
               value={responses[scenario.id]}
               onValueChange={(value) => handleResponseChange(scenario.id, value)}
@@ -66,13 +71,20 @@ export function ScenariosStep({ onNext, onBack, updateData, initialData }: Scena
           </div>
         ))}
       </CardContent>
-      <CardFooter className="flex justify-between">
+      <CardFooter className="flex flex-col sm:flex-row sm:items-center sm:justify-between gap-4">
         <Button variant="outline" onClick={onBack}>
           Back
         </Button>
-        <Button onClick={handleNextClick} disabled={!isComplete}>
-          Next
-        </Button>
+        <div className="flex flex-col items-end gap-2">
+          {!isComplete && (
+            <p className="text-xs text-muted-foreground text-right">
+              Falta completar los ítems: {incompleteScenarioNumbers.join(', ')}
+            </p>
+          )}
+          <Button onClick={handleNextClick} disabled={!isComplete}>
+            Next
+          </Button>
+        </div>
       </CardFooter>
     </Card>
   );
