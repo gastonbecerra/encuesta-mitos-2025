@@ -9,7 +9,7 @@ import { ResultsStep } from "@/components/survey/ResultsStep";
 import { ScenariosStep } from "@/components/survey/ScenariosStep";
 import { ConsentStep } from "@/components/survey/ConsentStep";
 import { Toaster } from "@/components/ui/toaster";
-import { ClipboardList, Gavel, User, Mail, Phone, Twitter, Linkedin, CheckSquare } from "lucide-react";
+import { ClipboardList, Gavel, User, CheckSquare } from "lucide-react";
 
 const surveySteps = [
   { id: 1, name: "Consentimiento", icon: CheckSquare },
@@ -94,37 +94,11 @@ export default function Home() {
           <main className="w-full animate-in fade-in-50 duration-500">
             {renderStepContent()}
           </main>
-          <footer className="border-t border-border pt-8 mt-12">
-            <div className="container mx-auto px-4">
-              <div className="flex flex-wrap justify-between">
-                <div className="w-full md:w-1/3 mb-6 md:mb-0">
-                  <h3 className="text-lg font-semibold text-foreground mb-2">Ethical Compass</h3>
-                  <p className="text-muted-foreground">Explorando el futuro de la ética en IA, juntos.</p>
-                </div>
-                <div className="w-full md:w-1/3 mb-6 md:mb-0">
-                  <h3 className="text-lg font-semibold text-foreground mb-2">Contacto</h3>
-                  <ul className="text-muted-foreground space-y-2">
-                    <li className="flex items-center">
-                      <Mail className="w-4 h-4 mr-2" />
-                      <span>contact@ethicalcompass.com</span>
-                    </li>
-                    <li className="flex items-center">
-                      <Phone className="w-4 h-4 mr-2" />
-                      <span>+1 (555) 123-4567</span>
-                    </li>
-                  </ul>
-                </div>
-                <div className="w-full md:w-1/3">
-                  <h3 className="text-lg font-semibold text-foreground mb-2">Seguinos</h3>
-                  <div className="flex space-x-4">
-                    <a href="#" className="text-muted-foreground hover:text-primary"><Twitter /></a>
-                    <a href="#" className="text-muted-foreground hover:text-primary"><Linkedin /></a>
-                  </div>
-                </div>
-              </div>
-              <div className="mt-8 text-center text-sm text-muted-foreground">
-                <p>&copy; {new Date().getFullYear()} Ethical Compass. Todos los derechos reservados.</p>
-              </div>
+          <footer className="border-t border-border pt-8 mt-12 text-center text-muted-foreground">
+            <div className="container mx-auto px-4 text-sm">
+                <p className="font-semibold">Proyecto de Investigación: "Incorporación de la IA en el aula" (2023-2026)</p>
+                <p>Unidad: Licenciatura en Sociología, Facultad de Psicología y Ciencias Sociales, Universidad de Flores (Argentina)</p>
+                <p>Contacto del equipo de investigación: gaston.becerra@uflouniversidad.edu.ar</p>
             </div>
           </footer>
         </div>
