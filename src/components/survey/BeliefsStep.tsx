@@ -40,6 +40,11 @@ export function BeliefsStep({ onNext, onBack, updateData, initialData }: Beliefs
   
   const isComplete = Object.keys(responses).length === beliefStatements.length;
 
+  const incompleteStatementNumbers = beliefStatements
+    .map((statement, index) => ({ id: statement.id, number: index + 1 }))
+    .filter(item => !responses.hasOwnProperty(item.id))
+    .map(item => item.number);
+
   return (
     <Card>
       <CardHeader>
@@ -49,9 +54,9 @@ export function BeliefsStep({ onNext, onBack, updateData, initialData }: Beliefs
         </CardDescription>
       </CardHeader>
       <CardContent className="space-y-8">
-        {beliefStatements.map((statement) => (
+        {beliefStatements.map((statement, index) => (
           <div key={statement.id} className="space-y-4">
-            <p className="font-medium">{statement.text}</p>
+            <p className="font-medium">{`${index + 1}. ${statement.text}`}</p>
             <RadioGroup
               value={responses[statement.id]}
               onValueChange={(value) => handleResponseChange(statement.id, value)}
@@ -67,13 +72,20 @@ export function BeliefsStep({ onNext, onBack, updateData, initialData }: Beliefs
           </div>
         ))}
       </CardContent>
-      <CardFooter className="flex justify-between">
+      <CardFooter className="flex flex-col sm:flex-row sm:items-center sm:justify-between gap-4">
         <Button variant="outline" onClick={onBack}>
           Back
         </Button>
-        <Button onClick={handleNextClick} disabled={!isComplete}>
-          Next
-        </Button>
+        <div className="flex flex-col items-end gap-2">
+            {!isComplete && (
+            <p className="text-xs text-muted-foreground text-right">
+                Falta completar los ítems: {incompleteStatementNumbers.join(', ')}
+            </p>
+            )}
+            <Button onClick={handleNextClick} disabled={!isComplete}>
+            Next
+            </Button>
+        </div>
       </CardFooter>
     </Card>
   );
