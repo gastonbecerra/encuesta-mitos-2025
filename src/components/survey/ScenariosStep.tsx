@@ -1,6 +1,6 @@
 "use client";
 
-import { useState } from 'react';
+import { useState, useEffect } from 'react';
 import { Card, CardContent, CardDescription, CardFooter, CardHeader, CardTitle } from "@/components/ui/card";
 import { Button } from "@/components/ui/button";
 import { RadioGroup, RadioGroupItem } from "@/components/ui/radio-group";
@@ -16,7 +16,7 @@ interface ScenariosStepProps {
   initialData: ScenariosData;
 }
 
-const { scenarios } = survey;
+const { scenarios: allScenarios } = survey;
 
 const scenarioOptions = [
     { id: 'ia', label: 'Prefiero IA' },
@@ -26,6 +26,35 @@ const scenarioOptions = [
 
 export function ScenariosStep({ onNext, onBack, updateData, initialData }: ScenariosStepProps) {
   const [responses, setResponses] = useState<ScenariosData>(initialData);
+  const [selectedScenarios, setSelectedScenarios] = useState<typeof allScenarios>([]);
+
+  useEffect(() => {
+    const scenariosByBelief = allScenarios.reduce((acc, scenario) => {
+      if (!acc[scenario.belief_id]) {
+        acc[scenario.belief_id] = [];
+      }
+      acc[scenario.belief_id].push(scenario);
+      return acc;
+    }, {} as Record<string, typeof allScenarios>);
+
+    const randomScenarios = Object.values(scenariosByBelief).map(group => {
+      const randomIndex = Math.floor(Math.random() * group.length);
+      return group[randomIndex];
+    });
+    
+    setSelectedScenarios(randomScenarios);
+    
+    // Clear initialData if it contains responses for scenarios that are not selected
+    const selectedIds = new Set(randomScenarios.map(s => s.id));
+    const relevantInitialData: ScenariosData = {};
+    for (const key in initialData) {
+      if (selectedIds.has(key)) {
+        relevantInitialData[key] = initialData[key];
+      }
+    }
+    setResponses(relevantInitialData);
+    
+  }, []);
 
   const handleResponseChange = (scenarioId: string, value: string) => {
     setResponses(prev => ({ ...prev, [scenarioId]: value }));
@@ -36,9 +65,9 @@ export function ScenariosStep({ onNext, onBack, updateData, initialData }: Scena
     onNext();
   };
   
-  const isComplete = Object.keys(responses).length === scenarios.length;
+  const isComplete = Object.keys(responses).length === selectedScenarios.length;
   
-  const incompleteScenarioNumbers = scenarios
+  const incompleteScenarioNumbers = selectedScenarios
     .map((scenario, index) => ({ id: scenario.id, number: index + 1 }))
     .filter(item => !responses.hasOwnProperty(item.id))
     .map(item => item.number);
@@ -53,9 +82,9 @@ export function ScenariosStep({ onNext, onBack, updateData, initialData }: Scena
         </CardDescription>
       </CardHeader>
       <CardContent className="space-y-8">
-        {scenarios.map((scenario, index) => (
+        {selectedScenarios.map((scenario, index) => (
           <div key={scenario.id} className="space-y-4 rounded-lg border p-4 shadow-sm">
-            <h3 className="font-semibold">{index + 1}.{scenario.text}</h3>
+            <h3 className="font-semibold">{index + 1}. {scenario.text}</h3>
             <RadioGroup
               value={responses[scenario.id]}
               onValueChange={(value) => handleResponseChange(scenario.id, value)}
@@ -81,7 +110,7 @@ export function ScenariosStep({ onNext, onBack, updateData, initialData }: Scena
               Falta completar los ítems: {incompleteScenarioNumbers.join(', ')}
             </p>
           )}
-          <Button onClick={handleNextClick} disabled={!isComplete}>
+          <Button onClick={handleNextClick}>
             Next
           </Button>
         </div>
