@@ -20,13 +20,12 @@ const formSchema = z.object({
 type DemographicsData = z.infer<typeof formSchema>;
 
 interface DemographicsStepProps {
-  onNext: () => void;
   onBack: () => void;
-  updateData: (data: { demographics: DemographicsData }) => void;
+  onFinish: (data: DemographicsData) => void;
   initialData: Partial<DemographicsData>;
 }
 
-export function DemographicsStep({ onNext, onBack, updateData, initialData }: DemographicsStepProps) {
+export function DemographicsStep({ onBack, onFinish, initialData }: DemographicsStepProps) {
   const form = useForm<DemographicsData>({
     resolver: zodResolver(formSchema),
     defaultValues: {
@@ -38,8 +37,7 @@ export function DemographicsStep({ onNext, onBack, updateData, initialData }: De
   });
 
   function onSubmit(values: DemographicsData) {
-    updateData({ demographics: values });
-    onNext();
+    onFinish(values);
   }
 
   return (

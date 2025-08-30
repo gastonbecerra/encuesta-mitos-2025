@@ -24,6 +24,7 @@ export default function Home() {
     beliefs: {},
     scenarios: {},
     demographics: {},
+    completionTimestamp: "",
   });
 
   const updateSurveyData = (data: object) => {
@@ -39,25 +40,34 @@ export default function Home() {
     window.scrollTo(0, 0);
   };
   const handleRestart = () => {
-    setSurveyData({ beliefs: {}, scenarios: {}, demographics: {} });
+    setSurveyData({
+      beliefs: {},
+      scenarios: {},
+      demographics: {},
+      completionTimestamp: "",
+    });
     setCurrentStep(1);
     window.scrollTo(0, 0);
   };
 
+  const handleFinish = (demographicsData: object) => {
+    updateSurveyData({
+      demographics: demographicsData,
+      completionTimestamp: new Date().toISOString(),
+    });
+    handleNext();
+  };
+
   const renderStepContent = () => {
-    const commonProps = {
-      updateData: updateSurveyData,
-      onNext: handleNext,
-    };
     switch (currentStep) {
       case 1:
         return <ConsentStep onNext={handleNext} />;
       case 2:
-        return <BeliefsStep {...commonProps} initialData={surveyData.beliefs} onBack={handleBack} />;
+        return <BeliefsStep updateData={updateSurveyData} onNext={handleNext} initialData={surveyData.beliefs} onBack={handleBack} />;
       case 3:
-        return <ScenariosStep {...commonProps} onBack={handleBack} initialData={surveyData.scenarios} />;
+        return <ScenariosStep updateData={updateSurveyData} onNext={handleNext} onBack={handleBack} initialData={surveyData.scenarios} />;
       case 4:
-        return <DemographicsStep {...commonProps} onBack={handleBack} initialData={surveyData.demographics} />;
+        return <DemographicsStep onBack={handleBack} initialData={surveyData.demographics} onFinish={handleFinish} />;
       case 5:
         return <ResultsStep data={surveyData} onRestart={handleRestart} />;
       default:
