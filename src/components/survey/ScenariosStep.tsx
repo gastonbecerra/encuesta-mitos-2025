@@ -23,13 +23,13 @@ interface ScenariosStepProps {
 const { scenarios: allScenarios } = survey;
 
 const baseScenarioOptions = [
-    { id: 'ia', label: 'Prefiero IA' },
-    { id: 'human', label: 'Prefiero humano' },
+    { id: 'ia', label: 'Confío más en una Inteligencia Artificial' },
+    { id: 'human', label: 'Confío sólo en un humano' },
 ];
 
 const allScenarioOptions = [
     ...baseScenarioOptions,
-    { id: 'both', label: 'Prefiero ambos' },
+    { id: 'both', label: 'Confio en un humano asistido por Inteligencia Artificial' },
 ];
 
 export function ScenariosStep({ onNext, onBack, updateData, initialData }: ScenariosStepProps) {

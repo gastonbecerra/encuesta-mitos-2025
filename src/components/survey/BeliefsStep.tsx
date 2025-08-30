@@ -21,7 +21,7 @@ const { beliefs: beliefStatements } = survey;
 const likertOptions = [
   { id: 'sd', label: 'Totalmente en desacuerdo' },
   { id: 'd', label: 'En desacuerdo' },
-  { id: 'n', label: 'Neutral' },
+  { id: 'n', label: 'Ni en acuerdo ni desacuerdo' },
   { id: 'a', label: 'De acuerdo' },
   { id: 'sa', label: 'Totalmente de acuerdo' },
 ];

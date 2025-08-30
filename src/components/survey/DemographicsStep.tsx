@@ -14,6 +14,8 @@ const formSchema = z.object({
   age: z.coerce.number().min(13, { message: "Tenés que tener al menos 13 años." }).max(120),
   gender: z.string().min(1, { message: "Por favor, seleccioná un género." }),
   education: z.string().min(1, { message: "Por favor, seleccioná un nivel educativo." }),
+  studyArea: z.string().min(1, { message: "Por favor, seleccioná un área de estudios." }),
+  workArea: z.string().min(1, { message: "Por favor, seleccioná un área de desempeño laboral." }),
   country: z.string().min(2, { message: "Por favor, ingresá un país válido." }),
 });
 
@@ -25,6 +27,35 @@ interface DemographicsStepProps {
   initialData: Partial<DemographicsData>;
 }
 
+const studyAreas = [
+    { value: "ciencias-sociales-humanidades", label: "Ciencias Sociales y Humanidades" },
+    { value: "ciencias-economicas-administracion", label: "Ciencias Económicas y Administración" },
+    { value: "ingenieria-tecnologia", label: "Ingeniería y Tecnología" },
+    { value: "ciencias-salud", label: "Ciencias de la Salud" },
+    { value: "ciencias-exactas-naturales", label: "Ciencias Exactas y Naturales" },
+    { value: "arte-diseno", label: "Arte y Diseño" },
+    { value: "derecho-ciencias-juridicas", label: "Derecho y Ciencias Jurídicas" },
+    { value: "ciencias-educacion", label: "Ciencias de la Educación" },
+    { value: "comunicacion-periodismo", label: "Comunicación y Periodismo" },
+    { value: "informatica-programacion", label: "Informática y Programación" },
+    { value: "otra-no-aplica", label: "Otra / No aplica" },
+];
+
+const workAreas = [
+    { value: "tecnologia-informatica", label: "Tecnología e Informática" },
+    { value: "salud-servicios-sociales", label: "Salud y Servicios Sociales" },
+    { value: "educacion", label: "Educación" },
+    { value: "comercio-ventas", label: "Comercio y Ventas" },
+    { value: "administracion-finanzas", label: "Administración y Finanzas" },
+    { value: "industria-manufactura", label: "Industria y Manufactura" },
+    { value: "arte-cultura-diseno", label: "Arte, Cultura y Diseño" },
+    { value: "consultoria-servicios-profesionales", label: "Consultoría y Servicios Profesionales" },
+    { value: "gobierno-sector-publico", label: "Gobierno y Sector Público" },
+    { value: "comunicacion-marketing", label: "Comunicación y Marketing" },
+    { value: "otra-no-aplica", label: "Otra / No aplica / No trabajo" },
+];
+
+
 export function DemographicsStep({ onBack, onFinish, initialData }: DemographicsStepProps) {
   const form = useForm<DemographicsData>({
     resolver: zodResolver(formSchema),
@@ -32,7 +63,9 @@ export function DemographicsStep({ onBack, onFinish, initialData }: Demographics
       age: initialData.age || undefined,
       gender: initialData.gender || "",
       education: initialData.education || "",
-      country: initialData.country || "",
+      studyArea: initialData.studyArea || "",
+      workArea: initialData.workArea || "",
+      country: initialData.country || "Argentina",
     },
   });
 
@@ -104,6 +137,50 @@ export function DemographicsStep({ onBack, onFinish, initialData }: Demographics
                       <SelectItem value="masters">Maestría</SelectItem>
                       <SelectItem value="doctorate">Doctorado (PhD, etc.)</SelectItem>
                       <SelectItem value="other">Otro</SelectItem>
+                    </SelectContent>
+                  </Select>
+                  <FormMessage />
+                </FormItem>
+              )}
+            />
+            <FormField
+              control={form.control}
+              name="studyArea"
+              render={({ field }) => (
+                <FormItem>
+                  <FormLabel>Área de estudios</FormLabel>
+                  <Select onValueChange={field.onChange} defaultValue={field.value}>
+                    <FormControl>
+                      <SelectTrigger>
+                        <SelectValue placeholder="Seleccioná tu área de estudios" />
+                      </SelectTrigger>
+                    </FormControl>
+                    <SelectContent>
+                      {studyAreas.map(area => (
+                        <SelectItem key={area.value} value={area.value}>{area.label}</SelectItem>
+                      ))}
+                    </SelectContent>
+                  </Select>
+                  <FormMessage />
+                </FormItem>
+              )}
+            />
+            <FormField
+              control={form.control}
+              name="workArea"
+              render={({ field }) => (
+                <FormItem>
+                  <FormLabel>Área de desempeño laboral</FormLabel>
+                  <Select onValueChange={field.onChange} defaultValue={field.value}>
+                    <FormControl>
+                      <SelectTrigger>
+                        <SelectValue placeholder="Seleccioná tu área de desempeño laboral" />
+                      </SelectTrigger>
+                    </FormControl>
+                    <SelectContent>
+                      {workAreas.map(area => (
+                        <SelectItem key={area.value} value={area.value}>{area.label}</SelectItem>
+                      ))}
                     </SelectContent>
                   </Select>
                   <FormMessage />

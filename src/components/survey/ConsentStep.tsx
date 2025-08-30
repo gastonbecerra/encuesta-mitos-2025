@@ -16,22 +16,27 @@ export function ConsentStep({ onNext }: ConsentStepProps) {
   return (
     <Card>
       <CardHeader>
-        <CardTitle>Bienvenido/a al estudio Ethical Compass</CardTitle>
+        <CardTitle>Bienvenido/a!</CardTitle>
         <CardDescription>
-          Gracias por tu interés en nuestro estudio sobre la ética de la inteligencia artificial.
+          <p className="text-sm text-muted-foreground">
+            Somos un equipo de investigadores de la Universidad de Flores. Estamos estudiando las creencias y actitudes acerca de la inteligencia artificial.
+          </p>
         </CardDescription>
       </CardHeader>
       <CardContent className="space-y-4">
         <div className="space-y-2">
-            <h3 className="font-semibold">Objetivos del estudio</h3>
+            <h3 className="font-semibold">Participantes</h3>
             <p className="text-sm text-muted-foreground">
-                Esta encuesta busca reunir diversas perspectivas sobre los desafíos éticos que plantea la IA. Tus respuestas nos ayudarán a comprender la opinión pública y contribuirán al desarrollo de sistemas de IA más responsables.
+              Esta encuesta está destinada a residentes de Argentina, mayores de 18 años, con o sin conocimientos sobre la inteligencia artificial.
             </p>
         </div>
         <div className="space-y-2">
             <h3 className="font-semibold">Anonimato de los datos</h3>
             <p className="text-sm text-muted-foreground">
-                Todas tus respuestas serán registradas de forma anónima. No recopilaremos ninguna información de identificación personal. Los datos agregados y anonimizados podrán ser utilizados en publicaciones e informes de investigación.
+              Todas tus respuestas serán registradas de forma anónima. No recopilaremos ninguna información de identificación personal. Los datos agregados y anonimizados podrán ser utilizados en publicaciones e informes de investigación. Tu participación es voluntaria.
+            </p>
+            <p className="text-sm text-muted-foreground">
+              ⏱️ Completar esta encuesta te llevará cerca de 4 minutos.
             </p>
         </div>
         <div className="flex items-center space-x-2 pt-4">

@@ -83,7 +83,7 @@ export default function Home() {
       <div className="flex min-h-screen w-full flex-col items-center bg-background p-4 sm:p-6 lg:p-8">
         <div className="w-full max-w-4xl space-y-8">
           <header className="text-center">
-            <h1 className="text-3xl font-headline font-semibold text-primary">Creencias y actitudes sobre la Inteligencia Artificial</h1>
+            <h1 className="text-3xl font-headline font-semibold text-primary">Encuesta de creencias y actitudes sobre la Inteligencia Artificial</h1>
           </header>
 
           {currentStep > 1 && currentStep <= displaySteps.length + 1 && (
