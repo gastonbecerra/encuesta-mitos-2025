@@ -19,11 +19,11 @@ interface BeliefsStepProps {
 const { beliefs: beliefStatements } = survey;
 
 const likertOptions = [
-  { id: 'sd', label: 'Totalmente en desacuerdo' },
-  { id: 'd', label: 'En desacuerdo' },
-  { id: 'n', label: 'Ni en acuerdo ni desacuerdo' },
-  { id: 'a', label: 'De acuerdo' },
-  { id: 'sa', label: 'Totalmente de acuerdo' },
+  { id: '1', label: 'Totalmente en desacuerdo' },
+  { id: '2', label: 'En desacuerdo' },
+  { id: '3', label: 'Ni en acuerdo ni desacuerdo' },
+  { id: '4', label: 'De acuerdo' },
+  { id: '5', label: 'Totalmente de acuerdo' },
 ];
 
 export function BeliefsStep({ onNext, onBack, updateData, initialData }: BeliefsStepProps) {

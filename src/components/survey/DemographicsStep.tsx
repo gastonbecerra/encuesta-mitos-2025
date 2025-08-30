@@ -31,7 +31,7 @@ const studyAreas = [
     { value: "ciencias-sociales-humanidades", label: "Ciencias Sociales y Humanidades" },
     { value: "ciencias-economicas-administracion", label: "Ciencias Económicas y Administración" },
     { value: "ingenieria-tecnologia", label: "Ingeniería y Tecnología" },
-    { value: "ciencias-salud", label: "Ciencias de la Salud" },
+    { value: "ciencias-salud", label: "Ciencias de la Salud / Psicología" },
     { value: "ciencias-exactas-naturales", label: "Ciencias Exactas y Naturales" },
     { value: "arte-diseno", label: "Arte y Diseño" },
     { value: "derecho-ciencias-juridicas", label: "Derecho y Ciencias Jurídicas" },
