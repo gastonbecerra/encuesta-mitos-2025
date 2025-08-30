@@ -13,9 +13,9 @@ import { ClipboardList, Gavel, User, Mail, Phone, Twitter, Linkedin, CheckSquare
 
 const surveySteps = [
   { id: 1, name: "Consent", icon: CheckSquare },
-  // { id: 2, name: "Beliefs", icon: ClipboardList }, // Temporarily disabled
-  { id: 2, name: "Scenarios", icon: Gavel },
-  { id: 3, name: "Demographics", icon: User },
+  { id: 2, name: "Beliefs", icon: ClipboardList },
+  { id: 3, name: "Scenarios", icon: Gavel },
+  { id: 4, name: "Demographics", icon: User },
 ];
 
 export default function Home() {
@@ -30,7 +30,7 @@ export default function Home() {
     setSurveyData((prev) => ({ ...prev, ...data }));
   };
 
-  const handleNext = () => setCurrentStep((prev) => Math.min(prev + 1, surveySteps.length + 2));
+  const handleNext = () => setCurrentStep((prev) => Math.min(prev + 1, surveySteps.length + 1));
   const handleBack = () => setCurrentStep((prev) => Math.max(prev - 1, 1));
   const handleRestart = () => {
     setSurveyData({ beliefs: {}, scenarios: {}, demographics: {} });
@@ -45,20 +45,14 @@ export default function Home() {
     switch (currentStep) {
       case 1:
         return <ConsentStep onNext={handleNext} />;
-      case 2: // Was Scenarios, now it's the second step
+      case 2:
+        return <BeliefsStep {...commonProps} initialData={surveyData.beliefs} onBack={handleBack} />;
+      case 3:
         return <ScenariosStep {...commonProps} onBack={handleBack} initialData={surveyData.scenarios} />;
-      case 3: // Was Demographics
+      case 4:
         return <DemographicsStep {...commonProps} onBack={handleBack} initialData={surveyData.demographics} />;
-      case 4: // Was Results
+      case 5:
         return <ResultsStep data={surveyData} onRestart={handleRestart} />;
-      // case 2:
-      //   return <BeliefsStep {...commonProps} initialData={surveyData.beliefs} onBack={handleBack} />;
-      // case 3:
-      //   return <ScenariosStep {...commonProps} onBack={handleBack} initialData={surveyData.scenarios} />;
-      // case 4:
-      //   return <DemographicsStep {...commonProps} onBack={handleBack} initialData={surveyData.demographics} />;
-      // case 5:
-      //   return <ResultsStep data={surveyData} onRestart={handleRestart} />;
       default:
         return null;
     }
