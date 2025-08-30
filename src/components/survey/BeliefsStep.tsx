@@ -38,13 +38,6 @@ export function BeliefsStep({ onNext, onBack, updateData, initialData }: Beliefs
     onNext();
   };
   
-  const isComplete = Object.keys(responses).length === beliefStatements.length;
-
-  const incompleteStatementNumbers = beliefStatements
-    .map((statement, index) => ({ id: statement.id, number: index + 1 }))
-    .filter(item => !responses.hasOwnProperty(item.id))
-    .map(item => item.number);
-
   return (
     <Card>
       <CardHeader>
@@ -77,13 +70,8 @@ export function BeliefsStep({ onNext, onBack, updateData, initialData }: Beliefs
           Back
         </Button>
         <div className="flex flex-col items-end gap-2">
-            {!isComplete && (
-            <p className="text-xs text-muted-foreground text-right">
-                Falta completar los ítems: {incompleteStatementNumbers.join(', ')}
-            </p>
-            )}
-            <Button onClick={handleNextClick} disabled={!isComplete}>
-            Next
+            <Button onClick={handleNextClick}>
+              Next
             </Button>
         </div>
       </CardFooter>
