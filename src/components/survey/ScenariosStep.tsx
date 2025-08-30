@@ -5,6 +5,7 @@ import { Card, CardContent, CardDescription, CardFooter, CardHeader, CardTitle }
 import { Button } from "@/components/ui/button";
 import { RadioGroup, RadioGroupItem } from "@/components/ui/radio-group";
 import { Label } from "@/components/ui/label";
+import survey from '@/data/survey.json';
 
 type ScenariosData = { [key: string]: string };
 
@@ -15,28 +16,7 @@ interface ScenariosStepProps {
   initialData: ScenariosData;
 }
 
-const scenarios = [
-  {
-    id: 's1',
-    title: 'Autonomous Vehicle Dilemma',
-    description: 'An autonomous vehicle is in an unavoidable accident. It must choose between hitting a group of pedestrians or swerving and hitting a single passenger in another car.',
-    options: [
-      { id: 's1o1', label: 'The AI should minimize loss of life, even if it means sacrificing its own passenger.' },
-      { id: 's1o2', label: 'The AI should prioritize the safety of its passenger above all else.' },
-      { id: 's1o3', label: 'A human should always make the final decision in such scenarios via remote control.' },
-    ],
-  },
-  {
-    id: 's2',
-    title: 'AI in Hiring',
-    description: 'An AI is used to screen job applicants. It is more efficient but may perpetuate historical biases from its training data.',
-    options: [
-      { id: 's2o1', label: 'Use the AI for efficiency, but have human oversight to correct for bias.' },
-      { id: 's2o2', label: 'Do not use the AI until it can be proven to be completely unbiased.' },
-      { id: 's2o3', label: 'Use the AI without oversight; efficiency gains are worth the risk of some bias.' },
-    ],
-  },
-];
+const { scenarios } = survey;
 
 export function ScenariosStep({ onNext, onBack, updateData, initialData }: ScenariosStepProps) {
   const [responses, setResponses] = useState<ScenariosData>(initialData);

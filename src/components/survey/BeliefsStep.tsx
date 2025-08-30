@@ -5,6 +5,7 @@ import { Card, CardContent, CardDescription, CardFooter, CardHeader, CardTitle }
 import { Button } from "@/components/ui/button";
 import { RadioGroup, RadioGroupItem } from "@/components/ui/radio-group";
 import { Label } from "@/components/ui/label";
+import survey from '@/data/survey.json';
 
 type BeliefsData = { [key: string]: string };
 
@@ -15,13 +16,7 @@ interface BeliefsStepProps {
   initialData: BeliefsData;
 }
 
-const beliefStatements = [
-  { id: 'b1', text: 'AI should be developed with human well-being as the primary goal.' },
-  { id: 'b2', text: 'It is acceptable for AI to make life-or-death decisions without human oversight.' },
-  { id: 'b3', text: 'Governments should strictly regulate the development of advanced AI.' },
-  { id: 'b4', text: 'AI-driven job displacement is a necessary consequence of technological progress.' },
-  { id: 'b5', text: 'Personal data privacy is more important than the potential benefits of AI-driven services.' },
-];
+const { beliefs: beliefStatements } = survey;
 
 const likertOptions = [
   { id: 'sd', label: 'Strongly Disagree' },
