@@ -7,7 +7,11 @@ import { RadioGroup, RadioGroupItem } from "@/components/ui/radio-group";
 import { Label } from "@/components/ui/label";
 import survey from '@/data/survey.json';
 
-type ScenariosData = { [key: string]: string };
+type ScenarioResponse = {
+  answer: string;
+  optionsCount: number;
+};
+type ScenariosData = { [key: string]: ScenarioResponse };
 
 interface ScenariosStepProps {
   onNext: () => void;
@@ -18,17 +22,26 @@ interface ScenariosStepProps {
 
 const { scenarios: allScenarios } = survey;
 
-const scenarioOptions = [
+const baseScenarioOptions = [
     { id: 'ia', label: 'Prefiero IA' },
     { id: 'human', label: 'Prefiero humano' },
+];
+
+const allScenarioOptions = [
+    ...baseScenarioOptions,
     { id: 'both', label: 'Prefiero ambos' },
 ];
 
 export function ScenariosStep({ onNext, onBack, updateData, initialData }: ScenariosStepProps) {
   const [responses, setResponses] = useState<ScenariosData>(initialData);
-  const [selectedScenarios, setSelectedScenarios] = useState<typeof allScenarios>([]);
+  const [selectedScenarios, setSelectedScenarios] = useState<(typeof allScenarios[0])[]>([]);
+  const [scenarioOptionCounts, setScenarioOptionCounts] = useState<{[key: string]: number}>({});
 
   useEffect(() => {
+    // This logic should only run once on component mount to select scenarios
+    // and should not re-run, to avoid re-randomizing if a user goes back and forth.
+    if (selectedScenarios.length > 0) return;
+
     const scenariosByBelief = allScenarios.reduce((acc, scenario) => {
       if (!acc[scenario.belief_id]) {
         acc[scenario.belief_id] = [];
@@ -44,7 +57,12 @@ export function ScenariosStep({ onNext, onBack, updateData, initialData }: Scena
     
     setSelectedScenarios(randomScenarios);
     
-    // Clear initialData if it contains responses for scenarios that are not selected
+    const optionCounts: {[key: string]: number} = {};
+    randomScenarios.forEach(scenario => {
+      optionCounts[scenario.id] = Math.random() < 0.5 ? 2 : 3;
+    });
+    setScenarioOptionCounts(optionCounts);
+
     const selectedIds = new Set(randomScenarios.map(s => s.id));
     const relevantInitialData: ScenariosData = {};
     for (const key in initialData) {
@@ -54,11 +72,26 @@ export function ScenariosStep({ onNext, onBack, updateData, initialData }: Scena
     }
     setResponses(relevantInitialData);
     
+  // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
 
   const handleResponseChange = (scenarioId: string, value: string) => {
-    setResponses(prev => ({ ...prev, [scenarioId]: value }));
+    setResponses(prev => ({
+      ...prev,
+      [scenarioId]: {
+        answer: value,
+        optionsCount: scenarioOptionCounts[scenarioId]
+      }
+    }));
   };
+  
+  const getOptionsForScenario = (scenarioId: string) => {
+      const count = scenarioOptionCounts[scenarioId];
+      if (count === 2) {
+          return baseScenarioOptions;
+      }
+      return allScenarioOptions;
+  }
 
   const handleNextClick = () => {
     updateData({ scenarios: responses });
@@ -86,11 +119,11 @@ export function ScenariosStep({ onNext, onBack, updateData, initialData }: Scena
           <div key={scenario.id} className="space-y-4 rounded-lg border p-4 shadow-sm">
             <h3 className="font-semibold">{index + 1}. {scenario.text}</h3>
             <RadioGroup
-              value={responses[scenario.id]}
+              value={responses[scenario.id]?.answer}
               onValueChange={(value) => handleResponseChange(scenario.id, value)}
               className="space-y-2"
             >
-              {scenarioOptions.map(option => (
+              {getOptionsForScenario(scenario.id).map(option => (
                 <div key={option.id} className="flex items-center space-x-2">
                   <RadioGroupItem value={option.id} id={`${scenario.id}-${option.id}`} />
                   <Label htmlFor={`${scenario.id}-${option.id}`}>{option.label}</Label>
