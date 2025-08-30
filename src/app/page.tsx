@@ -30,11 +30,18 @@ export default function Home() {
     setSurveyData((prev) => ({ ...prev, ...data }));
   };
 
-  const handleNext = () => setCurrentStep((prev) => Math.min(prev + 1, surveySteps.length + 1));
-  const handleBack = () => setCurrentStep((prev) => Math.max(prev - 1, 1));
+  const handleNext = () => {
+    setCurrentStep((prev) => Math.min(prev + 1, surveySteps.length + 1));
+    window.scrollTo(0, 0);
+  };
+  const handleBack = () => {
+    setCurrentStep((prev) => Math.max(prev - 1, 1));
+    window.scrollTo(0, 0);
+  };
   const handleRestart = () => {
     setSurveyData({ beliefs: {}, scenarios: {}, demographics: {} });
     setCurrentStep(1);
+    window.scrollTo(0, 0);
   };
 
   const renderStepContent = () => {
@@ -58,7 +65,7 @@ export default function Home() {
     }
   };
   
-  const activeStep = currentStep > 1 ? currentStep : 1;
+  const activeStep = currentStep > 1 ? currentStep - 1 : currentStep;
   const displaySteps = surveySteps.filter(step => step.name !== 'Consent');
 
   return (
