@@ -13,9 +13,9 @@ import { ClipboardList, Gavel, User, Mail, Phone, Twitter, Linkedin, CheckSquare
 
 const surveySteps = [
   { id: 1, name: "Consent", icon: CheckSquare },
-  { id: 2, name: "Beliefs", icon: ClipboardList },
-  { id: 3, name: "Scenarios", icon: Gavel },
-  { id: 4, name: "Demographics", icon: User },
+  // { id: 2, name: "Beliefs", icon: ClipboardList }, // Temporarily disabled
+  { id: 2, name: "Scenarios", icon: Gavel },
+  { id: 3, name: "Demographics", icon: User },
 ];
 
 export default function Home() {
@@ -45,21 +45,27 @@ export default function Home() {
     switch (currentStep) {
       case 1:
         return <ConsentStep onNext={handleNext} />;
-      case 2:
-        return <BeliefsStep {...commonProps} initialData={surveyData.beliefs} onBack={handleBack} />;
-      case 3:
+      case 2: // Was Scenarios, now it's the second step
         return <ScenariosStep {...commonProps} onBack={handleBack} initialData={surveyData.scenarios} />;
-      case 4:
+      case 3: // Was Demographics
         return <DemographicsStep {...commonProps} onBack={handleBack} initialData={surveyData.demographics} />;
-      case 5:
+      case 4: // Was Results
         return <ResultsStep data={surveyData} onRestart={handleRestart} />;
+      // case 2:
+      //   return <BeliefsStep {...commonProps} initialData={surveyData.beliefs} onBack={handleBack} />;
+      // case 3:
+      //   return <ScenariosStep {...commonProps} onBack={handleBack} initialData={surveyData.scenarios} />;
+      // case 4:
+      //   return <DemographicsStep {...commonProps} onBack={handleBack} initialData={surveyData.demographics} />;
+      // case 5:
+      //   return <ResultsStep data={surveyData} onRestart={handleRestart} />;
       default:
         return null;
     }
   };
   
-  const activeStep = currentStep > 1 ? currentStep - 1 : currentStep;
-  const displaySteps = surveySteps.filter(step => step.id !== 1);
+  const activeStep = currentStep > 1 ? currentStep : 1;
+  const displaySteps = surveySteps.filter(step => step.name !== 'Consent');
 
   return (
     <>
