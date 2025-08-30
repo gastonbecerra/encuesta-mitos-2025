@@ -29,7 +29,12 @@ interface DemographicsStepProps {
 export function DemographicsStep({ onNext, onBack, updateData, initialData }: DemographicsStepProps) {
   const form = useForm<DemographicsData>({
     resolver: zodResolver(formSchema),
-    defaultValues: initialData,
+    defaultValues: {
+      age: initialData.age || undefined,
+      gender: initialData.gender || "",
+      education: initialData.education || "",
+      country: initialData.country || "",
+    },
   });
 
   function onSubmit(values: DemographicsData) {
@@ -53,7 +58,7 @@ export function DemographicsStep({ onNext, onBack, updateData, initialData }: De
                 <FormItem>
                   <FormLabel>Age</FormLabel>
                   <FormControl>
-                    <Input type="number" placeholder="e.g., 25" {...field} />
+                    <Input type="number" placeholder="e.g., 25" {...field} onChange={e => field.onChange(e.target.value === '' ? undefined : e.target.valueAsNumber)} />
                   </FormControl>
                   <FormMessage />
                 </FormItem>
