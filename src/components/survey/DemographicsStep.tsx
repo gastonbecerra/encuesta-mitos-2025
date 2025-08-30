@@ -11,10 +11,10 @@ import { Input } from "@/components/ui/input";
 import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from "@/components/ui/select";
 
 const formSchema = z.object({
-  age: z.coerce.number().min(13, { message: "You must be at least 13 years old." }).max(120),
-  gender: z.string().min(1, { message: "Please select a gender." }),
-  education: z.string().min(1, { message: "Please select an education level." }),
-  country: z.string().min(2, { message: "Please enter a valid country." }),
+  age: z.coerce.number().min(13, { message: "Tenés que tener al menos 13 años." }).max(120),
+  gender: z.string().min(1, { message: "Por favor, seleccioná un género." }),
+  education: z.string().min(1, { message: "Por favor, seleccioná un nivel educativo." }),
+  country: z.string().min(2, { message: "Por favor, ingresá un país válido." }),
 });
 
 type DemographicsData = z.infer<typeof formSchema>;
@@ -43,8 +43,8 @@ export function DemographicsStep({ onBack, onFinish, initialData }: Demographics
   return (
     <Card>
       <CardHeader>
-        <CardTitle>Demographic Information</CardTitle>
-        <CardDescription>This information helps us analyze the survey results. It will be kept anonymous.</CardDescription>
+        <CardTitle>Información demográfica</CardTitle>
+        <CardDescription>Esta información nos ayuda a analizar los resultados de la encuesta. Será mantenida de forma anónima.</CardDescription>
       </CardHeader>
       <Form {...form}>
         <form onSubmit={form.handleSubmit(onSubmit)}>
@@ -54,9 +54,9 @@ export function DemographicsStep({ onBack, onFinish, initialData }: Demographics
               name="age"
               render={({ field }) => (
                 <FormItem>
-                  <FormLabel>Age</FormLabel>
+                  <FormLabel>Edad</FormLabel>
                   <FormControl>
-                    <Input type="number" placeholder="e.g., 25" {...field} onChange={e => field.onChange(e.target.value === '' ? undefined : e.target.valueAsNumber)} />
+                    <Input type="number" placeholder="Ej: 25" {...field} onChange={e => field.onChange(e.target.value === '' ? undefined : e.target.valueAsNumber)} />
                   </FormControl>
                   <FormMessage />
                 </FormItem>
@@ -67,19 +67,19 @@ export function DemographicsStep({ onBack, onFinish, initialData }: Demographics
               name="gender"
               render={({ field }) => (
                 <FormItem>
-                  <FormLabel>Gender</FormLabel>
+                  <FormLabel>Género</FormLabel>
                    <Select onValueChange={field.onChange} defaultValue={field.value}>
                     <FormControl>
                       <SelectTrigger>
-                        <SelectValue placeholder="Select your gender" />
+                        <SelectValue placeholder="Seleccioná tu género" />
                       </SelectTrigger>
                     </FormControl>
                     <SelectContent>
-                      <SelectItem value="male">Male</SelectItem>
-                      <SelectItem value="female">Female</SelectItem>
-                      <SelectItem value="non-binary">Non-binary</SelectItem>
-                      <SelectItem value="other">Other</SelectItem>
-                      <SelectItem value="prefer-not-to-say">Prefer not to say</SelectItem>
+                      <SelectItem value="male">Masculino</SelectItem>
+                      <SelectItem value="female">Femenino</SelectItem>
+                      <SelectItem value="non-binary">No binario</SelectItem>
+                      <SelectItem value="other">Otro</SelectItem>
+                      <SelectItem value="prefer-not-to-say">Prefiero no decir</SelectItem>
                     </SelectContent>
                   </Select>
                   <FormMessage />
@@ -91,19 +91,19 @@ export function DemographicsStep({ onBack, onFinish, initialData }: Demographics
               name="education"
               render={({ field }) => (
                 <FormItem>
-                  <FormLabel>Highest level of education</FormLabel>
+                  <FormLabel>Nivel de educación más alto</FormLabel>
                    <Select onValueChange={field.onChange} defaultValue={field.value}>
                     <FormControl>
                       <SelectTrigger>
-                        <SelectValue placeholder="Select your education level" />
+                        <SelectValue placeholder="Seleccioná tu nivel de educación" />
                       </SelectTrigger>
                     </FormControl>
                     <SelectContent>
-                      <SelectItem value="high-school">High School</SelectItem>
-                      <SelectItem value="bachelors">Bachelor's Degree</SelectItem>
-                      <SelectItem value="masters">Master's Degree</SelectItem>
-                      <SelectItem value="doctorate">Doctorate (PhD, etc.)</SelectItem>
-                      <SelectItem value="other">Other</SelectItem>
+                      <SelectItem value="high-school">Secundario</SelectItem>
+                      <SelectItem value="bachelors">Universitario</SelectItem>
+                      <SelectItem value="masters">Maestría</SelectItem>
+                      <SelectItem value="doctorate">Doctorado (PhD, etc.)</SelectItem>
+                      <SelectItem value="other">Otro</SelectItem>
                     </SelectContent>
                   </Select>
                   <FormMessage />
@@ -115,9 +115,9 @@ export function DemographicsStep({ onBack, onFinish, initialData }: Demographics
               name="country"
               render={({ field }) => (
                 <FormItem>
-                  <FormLabel>Country of Residence</FormLabel>
+                  <FormLabel>País de residencia</FormLabel>
                   <FormControl>
-                    <Input placeholder="e.g., United States" {...field} />
+                    <Input placeholder="Ej: Argentina" {...field} />
                   </FormControl>
                   <FormMessage />
                 </FormItem>
@@ -126,10 +126,10 @@ export function DemographicsStep({ onBack, onFinish, initialData }: Demographics
           </CardContent>
           <CardFooter className="flex justify-between">
             <Button variant="outline" type="button" onClick={onBack}>
-              Back
+              Volver
             </Button>
             <Button type="submit">
-              Finish
+              Finalizar
             </Button>
           </CardFooter>
         </form>

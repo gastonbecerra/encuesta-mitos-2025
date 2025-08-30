@@ -109,9 +109,9 @@ export function ScenariosStep({ onNext, onBack, updateData, initialData }: Scena
   return (
     <Card>
       <CardHeader>
-        <CardTitle>Scenario Evaluation</CardTitle>
+        <CardTitle>Evaluación de escenarios</CardTitle>
         <CardDescription>
-          For each scenario, please choose the course of action you most agree with.
+          Para cada escenario, por favor elegí la opción con la que más estés de acuerdo.
         </CardDescription>
       </CardHeader>
       <CardContent className="space-y-8">
@@ -135,16 +135,16 @@ export function ScenariosStep({ onNext, onBack, updateData, initialData }: Scena
       </CardContent>
       <CardFooter className="flex flex-col sm:flex-row sm:items-center sm:justify-between gap-4">
         <Button variant="outline" onClick={onBack}>
-          Back
+          Volver
         </Button>
         <div className="flex flex-col items-end gap-2">
           {!isComplete && (
             <p className="text-xs text-muted-foreground text-right">
-              Falta completar los ítems: {incompleteScenarioNumbers.join(', ')}
+              Faltan completar los ítems: {incompleteScenarioNumbers.join(', ')}
             </p>
           )}
           <Button onClick={handleNextClick}>
-            Next
+            Siguiente
           </Button>
         </div>
       </CardFooter>

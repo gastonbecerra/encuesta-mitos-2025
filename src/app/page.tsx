@@ -12,10 +12,10 @@ import { Toaster } from "@/components/ui/toaster";
 import { ClipboardList, Gavel, User, Mail, Phone, Twitter, Linkedin, CheckSquare } from "lucide-react";
 
 const surveySteps = [
-  { id: 1, name: "Consent", icon: CheckSquare },
-  { id: 2, name: "Beliefs", icon: ClipboardList },
-  { id: 3, name: "Scenarios", icon: Gavel },
-  { id: 4, name: "Demographics", icon: User },
+  { id: 1, name: "Consentimiento", icon: CheckSquare },
+  { id: 2, name: "Creencias", icon: ClipboardList },
+  { id: 3, name: "Escenarios", icon: Gavel },
+  { id: 4, name: "Demografía", icon: User },
 ];
 
 export default function Home() {
@@ -76,7 +76,7 @@ export default function Home() {
   };
   
   const activeStep = currentStep > 1 ? currentStep - 1 : currentStep;
-  const displaySteps = surveySteps.filter(step => step.name !== 'Consent');
+  const displaySteps = surveySteps.filter(step => step.name !== 'Consentimiento');
 
   return (
     <>
@@ -84,7 +84,7 @@ export default function Home() {
         <div className="w-full max-w-4xl space-y-8">
           <header className="text-center">
             <h1 className="text-4xl font-headline font-bold text-primary">Ethical Compass</h1>
-            <p className="mt-2 text-muted-foreground">A survey on AI ethics and you</p>
+            <p className="mt-2 text-muted-foreground">Una encuesta sobre ética en IA y vos</p>
           </header>
 
           {currentStep > 1 && currentStep <= displaySteps.length + 1 && (
@@ -99,7 +99,7 @@ export default function Home() {
               <div className="flex flex-wrap justify-between">
                 <div className="w-full md:w-1/3 mb-6 md:mb-0">
                   <h3 className="text-lg font-semibold text-foreground mb-2">Ethical Compass</h3>
-                  <p className="text-muted-foreground">Exploring the future of AI ethics, together.</p>
+                  <p className="text-muted-foreground">Explorando el futuro de la ética en IA, juntos.</p>
                 </div>
                 <div className="w-full md:w-1/3 mb-6 md:mb-0">
                   <h3 className="text-lg font-semibold text-foreground mb-2">Contacto</h3>
@@ -115,7 +115,7 @@ export default function Home() {
                   </ul>
                 </div>
                 <div className="w-full md:w-1/3">
-                  <h3 className="text-lg font-semibold text-foreground mb-2">Síguenos</h3>
+                  <h3 className="text-lg font-semibold text-foreground mb-2">Seguinos</h3>
                   <div className="flex space-x-4">
                     <a href="#" className="text-muted-foreground hover:text-primary"><Twitter /></a>
                     <a href="#" className="text-muted-foreground hover:text-primary"><Linkedin /></a>

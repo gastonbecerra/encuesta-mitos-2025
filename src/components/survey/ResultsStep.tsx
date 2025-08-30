@@ -11,9 +11,9 @@ export function ResultsStep({ data, onRestart }: ResultsStepProps) {
   return (
     <Card>
       <CardHeader>
-        <CardTitle>Thank you for your participation!</CardTitle>
+        <CardTitle>¡Gracias por tu participación!</CardTitle>
         <CardDescription>
-          Your anonymous responses have been recorded. Here is a summary of your submission.
+          Tus respuestas anónimas fueron guardadas. Aquí tenés un resumen de tu envío.
         </CardDescription>
       </CardHeader>
       <CardContent>
@@ -23,7 +23,7 @@ export function ResultsStep({ data, onRestart }: ResultsStepProps) {
       </CardContent>
       <CardFooter>
         <Button onClick={onRestart} className="mx-auto">
-          Start Over
+          Empezar de nuevo
         </Button>
       </CardFooter>
     </Card>

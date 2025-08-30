@@ -19,11 +19,11 @@ interface BeliefsStepProps {
 const { beliefs: beliefStatements } = survey;
 
 const likertOptions = [
-  { id: 'sd', label: 'Strongly Disagree' },
-  { id: 'd', label: 'Disagree' },
+  { id: 'sd', label: 'Totalmente en desacuerdo' },
+  { id: 'd', label: 'En desacuerdo' },
   { id: 'n', label: 'Neutral' },
-  { id: 'a', label: 'Agree' },
-  { id: 'sa', label: 'Strongly Agree' },
+  { id: 'a', label: 'De acuerdo' },
+  { id: 'sa', label: 'Totalmente de acuerdo' },
 ];
 
 export function BeliefsStep({ onNext, onBack, updateData, initialData }: BeliefsStepProps) {
@@ -48,9 +48,9 @@ export function BeliefsStep({ onNext, onBack, updateData, initialData }: Beliefs
   return (
     <Card>
       <CardHeader>
-        <CardTitle>Belief Assessment</CardTitle>
+        <CardTitle>Evaluación de creencias</CardTitle>
         <CardDescription>
-          Please indicate your level of agreement with the following statements.
+          Por favor, indicá tu nivel de acuerdo con las siguientes afirmaciones.
         </CardDescription>
       </CardHeader>
       <CardContent className="space-y-8">
@@ -74,16 +74,16 @@ export function BeliefsStep({ onNext, onBack, updateData, initialData }: Beliefs
       </CardContent>
       <CardFooter className="flex flex-col sm:flex-row sm:items-center sm:justify-between gap-4">
         <Button variant="outline" onClick={onBack}>
-          Back
+          Volver
         </Button>
         <div className="flex flex-col items-end gap-2">
            {!isComplete && (
             <p className="text-xs text-muted-foreground text-right">
-              Falta completar los ítems: {incompleteStatementNumbers.join(', ')}
+              Faltan completar los ítems: {incompleteStatementNumbers.join(', ')}
             </p>
           )}
           <Button onClick={handleNextClick}>
-            Next
+            Siguiente
           </Button>
         </div>
       </CardFooter>
