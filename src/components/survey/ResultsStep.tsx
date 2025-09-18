@@ -47,14 +47,16 @@ export function ResultsStep({ data, onRestart }: ResultsStepProps) {
       <CardHeader>
         <CardTitle>¡Gracias por tu participación!</CardTitle>
         <CardDescription>
-          Tus respuestas anónimas fueron guardadas. Aquí tenés un resumen de tu envío.
+          Tus respuestas anónimas fueron guardadas! 
         </CardDescription>
       </CardHeader>
-      <CardContent>
+      
+      {/* <CardContent>
         <div className="rounded-md bg-muted p-4 text-sm text-muted-foreground overflow-x-auto">
           <pre><code>{JSON.stringify(data, null, 2)}</code></pre>
         </div>
-      </CardContent>
+      </CardContent> */}
+      
       <CardFooter>
         <div className="mx-auto flex flex-col items-center gap-4">
             <Button onClick={onRestart}>
