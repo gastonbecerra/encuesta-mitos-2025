@@ -61,29 +61,39 @@ export default function Home() {
 
   const handleFinish = async (demographicsData: object) => {
     setIsSubmitting(true);
-    const finalData = {
-      ...surveyData,
-      demographics: demographicsData,
-      completionTimestamp: new Date().toISOString(),
-    };
-    updateSurveyData(finalData);
+    try {
+      const finalData = {
+        ...surveyData,
+        demographics: demographicsData,
+        completionTimestamp: new Date().toISOString(),
+      };
+      updateSurveyData(finalData);
 
-    const result = await submitSurvey(finalData);
+      const result = await submitSurvey(finalData);
 
-    if (result.success) {
-      toast({
-        title: "¡Encuesta enviada!",
-        description: "Tus respuestas han sido guardadas. ¡Gracias!",
-      });
-      handleNext();
-    } else {
+      if (result.success) {
+        toast({
+          title: "¡Encuesta enviada!",
+          description: "Tus respuestas han sido guardadas. ¡Gracias!",
+        });
+        handleNext();
+      } else {
+        toast({
+          variant: "destructive",
+          title: "Error al enviar",
+          description: "No se pudieron guardar tus respuestas. Por favor, intentá de nuevo.",
+        });
+      }
+    } catch (error) {
+      console.error("Error calling submitSurvey:", error);
       toast({
         variant: "destructive",
-        title: "Error al enviar",
-        description: "No se pudieron guardar tus respuestas. Por favor, intentá de nuevo.",
+        title: "Error de comunicación",
+        description: "No se pudo contactar al servidor. Revisa la consola del navegador.",
       });
+    } finally {
+      setIsSubmitting(false);
     }
-    setIsSubmitting(false);
   };
 
   const renderStepContent = () => {
