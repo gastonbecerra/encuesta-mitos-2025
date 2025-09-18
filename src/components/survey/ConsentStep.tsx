@@ -41,7 +41,7 @@ export function ConsentStep({ onNext }: ConsentStepProps) {
               Todas tus respuestas serán registradas de forma anónima. No recopilaremos ninguna información de identificación personal. Los datos agregados y anonimizados podrán ser utilizados en publicaciones e informes de investigación. Tu participación es voluntaria.
             </p>
             <p className="text-sm text-muted-foreground">
-              ⏱️ Completar esta encuesta te llevará cerca de 4 minutos.
+              ⏱️ Completar esta encuesta te llevará cerca de 5 minutos.
             </p>
         </div>
         <div className="flex items-center space-x-2 pt-4">
