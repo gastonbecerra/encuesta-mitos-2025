@@ -46,9 +46,9 @@ export function ResultsStep({ data, onRestart }: ResultsStepProps) {
     <Card>
       <CardHeader>
         <CardTitle>¡Gracias por tu participación!</CardTitle>
-        <CardDescription>
-          Tus respuestas anónimas fueron guardadas! 
-        </CardDescription>
+        <p className="text-sm text-muted-foreground">
+        Tu aporte nos ayuda a seguir explorando el entendimiento público de la IA.
+        </p>
       </CardHeader>
       
       {/* <CardContent>
@@ -59,10 +59,10 @@ export function ResultsStep({ data, onRestart }: ResultsStepProps) {
       
       <CardFooter>
         <div className="mx-auto flex flex-col items-center gap-4">
-            <Button onClick={onRestart}>
+            {/* <Button onClick={onRestart}>
               Empezar de nuevo
-            </Button>
-            <Button variant="outline" onClick={handleShare}>
+            </Button> */}
+            <Button onClick={handleShare}>
               <Share2 className="mr-2" />
               Compartir encuesta
             </Button>

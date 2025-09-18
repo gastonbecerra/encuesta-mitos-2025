@@ -143,7 +143,7 @@ export function ScenariosStep({ onNext, onBack, updateData, initialData }: Scena
               Faltan completar los ítems: {incompleteScenarioNumbers.join(', ')}
             </p>
           )}
-          <Button onClick={handleNextClick}>
+          <Button onClick={handleNextClick} disabled={!isComplete}>
             Siguiente
           </Button>
         </div>

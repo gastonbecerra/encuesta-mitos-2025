@@ -91,7 +91,7 @@ export function AttitudesStep({ onNext, onBack, updateData, initialData }: Attit
               Faltan completar los ítems: {incompleteStatementNumbers.join(', ')}
             </p>
           )}
-          <Button onClick={handleNextClick}>
+          <Button onClick={handleNextClick} disabled={!isComplete}>
             Siguiente
           </Button>
         </div>

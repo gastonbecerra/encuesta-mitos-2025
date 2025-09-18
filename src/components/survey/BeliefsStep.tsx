@@ -93,7 +93,7 @@ export function BeliefsStep({ onNext, onBack, updateData, initialData }: Beliefs
               Faltan completar los ítems: {incompleteStatementNumbers.join(', ')}
             </p>
           )}
-          <Button onClick={handleNextClick}>
+          <Button onClick={handleNextClick} disabled={!isComplete}>
             Siguiente
           </Button>
         </div>
