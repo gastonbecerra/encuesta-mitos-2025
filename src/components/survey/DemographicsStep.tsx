@@ -182,7 +182,7 @@ export function DemographicsStep({ onBack, onFinish, initialData }: Demographics
               name="uso_ia_frecuencia"
               render={({ field }) => (
                 <FormItem>
-                  <FormLabel>¿Con qué frecuencia utilizás IA en tu trabajo o estudio?</FormLabel>
+                  <FormLabel>¿Con qué frecuencia utilizás herramientas de IA?</FormLabel>
                   <Select onValueChange={field.onChange} defaultValue={field.value}>
                     <FormControl>
                       <SelectTrigger>

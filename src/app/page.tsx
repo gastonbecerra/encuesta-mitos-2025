@@ -21,6 +21,7 @@ const surveySteps = [
 export default function Home() {
   const [currentStep, setCurrentStep] = useState(1);
   const [surveyData, setSurveyData] = useState({
+    startTime: new Date().toISOString(),
     beliefs: {},
     scenarios: {},
     demographics: {},
@@ -41,6 +42,7 @@ export default function Home() {
   };
   const handleRestart = () => {
     setSurveyData({
+      startTime: new Date().toISOString(),
       beliefs: {},
       scenarios: {},
       demographics: {},
