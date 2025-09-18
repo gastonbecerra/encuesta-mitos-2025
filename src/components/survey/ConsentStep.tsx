@@ -32,7 +32,7 @@ export function ConsentStep({ onNext }: ConsentStepProps) {
             </p>
             <ul className="list-disc list-inside space-y-1 pl-4 text-sm text-muted-foreground">
               <li>mayores de 18 años</li>
-              <li>que usaron herramientas de IA en los últimos 12 meses en su estudio o trabajo</li>
+              <li>que usaron herramientas de IA en los últimos 12 meses</li>
             </ul>
         </div>
         <div className="space-y-2">

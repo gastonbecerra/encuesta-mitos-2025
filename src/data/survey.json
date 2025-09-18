@@ -5,7 +5,6 @@
     {"id": "C3", "text": "Creo que la IA puede ofrecer orientación y atención psicológica"},
     {"id": "C4", "text": "Creo que la IA puede brindar compañía y apoyo emocional"},
     {"id": "C5", "text": "Creo que la IA puede hacer investigación científica"},
-    {"id": "C6", "text": "Creo que la IA puede diseñar políticas públicas"},
     {"id": "C7", "text": "Creo que la IA puede potenciar la creatividad humana"},
     {"id": "C8", "text": "Creo que la IA puede aportar a la inclusión educativa"},
     {"id": "C9", "text": "Creo que la IA puede enseñar"}
@@ -25,8 +24,6 @@
     {"id": "E12", "text": "Para darme una sugerencia sobre cómo responder a un mensaje de mi pareja ...", "belief_id": "C3"},
     {"id": "E13", "text": "Para guiarme en una investigación científica ...", "belief_id": "C5"},
     {"id": "E14", "text": "Para analizar los datos de una investigación ...", "belief_id": "C5"},
-    {"id": "E15", "text": "Para diseñar políticas públicas ...", "belief_id": "C6"},
-    {"id": "E16", "text": "***** Para simular escenarios de política social ... ?", "belief_id": "C6"},
     {"id": "E17", "text": "Para generar piezas de arte novedosas y creativas ...", "belief_id": "C7"},
     {"id": "E18", "text": "Para producir una ilustración digital original ...", "belief_id": "C7"},
     {"id": "E19", "text": "***** Para incluir a estudiantes con discapacidad ...", "belief_id": "C8"},
