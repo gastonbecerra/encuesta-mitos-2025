@@ -29,7 +29,7 @@ const baseScenarioOptions = [
 
 const allScenarioOptions = [
     ...baseScenarioOptions,
-    { id: 'both', label: 'Confio en un humano asistido por Inteligencia Artificial' },
+    { id: 'both', label: 'Confio en un humano usando/asistido por Inteligencia Artificial' },
 ];
 
 export function ScenariosStep({ onNext, onBack, updateData, initialData }: ScenariosStepProps) {

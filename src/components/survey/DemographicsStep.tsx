@@ -17,6 +17,7 @@ const formSchema = z.object({
   studyArea: z.string().min(1, { message: "Por favor, seleccioná un área de estudios." }),
   workArea: z.string().min(1, { message: "Por favor, seleccioná un área de desempeño laboral." }),
   country: z.string().min(1, { message: "Por favor, seleccioná un país." }),
+  uso_ia_frecuencia: z.string().min(1, { message: "Por favor, seleccioná una frecuencia." }),
 });
 
 type DemographicsData = z.infer<typeof formSchema>;
@@ -80,6 +81,13 @@ const countries = [
     { value: "Otro", label: "Otro" },
 ];
 
+const iaFrequencyOptions = [
+    { value: "nunca", label: "Nunca" },
+    { value: "esporadicamente", label: "Esporádicamente (≤1/mes)" },
+    { value: "ocasional", label: "Ocasional (semanalmente)" },
+    { value: "frecuente", label: "Frecuente (a diario)" },
+]
+
 
 export function DemographicsStep({ onBack, onFinish, initialData }: DemographicsStepProps) {
   const form = useForm<DemographicsData>({
@@ -91,6 +99,7 @@ export function DemographicsStep({ onBack, onFinish, initialData }: Demographics
       studyArea: initialData.studyArea || "",
       workArea: initialData.workArea || "",
       country: initialData.country || "Argentina",
+      uso_ia_frecuencia: initialData.uso_ia_frecuencia || "",
     },
   });
 
@@ -162,6 +171,28 @@ export function DemographicsStep({ onBack, onFinish, initialData }: Demographics
                       <SelectItem value="masters">Maestría</SelectItem>
                       <SelectItem value="doctorate">Doctorado (PhD, etc.)</SelectItem>
                       <SelectItem value="other">Otro</SelectItem>
+                    </SelectContent>
+                  </Select>
+                  <FormMessage />
+                </FormItem>
+              )}
+            />
+             <FormField
+              control={form.control}
+              name="uso_ia_frecuencia"
+              render={({ field }) => (
+                <FormItem>
+                  <FormLabel>¿Con qué frecuencia utilizás IA en tu trabajo o estudio?</FormLabel>
+                  <Select onValueChange={field.onChange} defaultValue={field.value}>
+                    <FormControl>
+                      <SelectTrigger>
+                        <SelectValue placeholder="Seleccioná una frecuencia" />
+                      </SelectTrigger>
+                    </FormControl>
+                    <SelectContent>
+                      {iaFrequencyOptions.map(option => (
+                        <SelectItem key={option.value} value={option.value}>{option.label}</SelectItem>
+                      ))}
                     </SelectContent>
                   </Select>
                   <FormMessage />
