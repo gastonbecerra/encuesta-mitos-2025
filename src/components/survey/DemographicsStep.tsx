@@ -234,7 +234,7 @@ export function DemographicsStep({ onBack, onFinish, initialData, isSubmitting =
               render={({ field }) => (
                 <FormItem>
                   <FormLabel>Área de desempeño laboral</FormLabel>
-                  <Select onValue-change={field.onChange} defaultValue={field.value}>
+                  <Select onValueChange={field.onChange} defaultValue={field.value}>
                     <FormControl>
                       <SelectTrigger>
                         <SelectValue placeholder="Seleccioná tu área de desempeño laboral" />
@@ -260,7 +260,7 @@ export function DemographicsStep({ onBack, onFinish, initialData, isSubmitting =
                     <FormControl>
                       <SelectTrigger>
                         <SelectValue placeholder="Seleccioná tu país" />
-                      </Trigger>
+                      </SelectTrigger>
                     </FormControl>
                     <SelectContent>
                       {countries.map(country => (
