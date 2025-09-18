@@ -9,6 +9,13 @@
     {"id": "C8", "text": "Creo que la IA puede aportar a la inclusión educativa"},
     {"id": "C9", "text": "Creo que la IA puede enseñar y guiar el aprendizaje"}
   ],
+  "attitudes": [
+    {"id": "A1", "text": "Considero que la inteligencia artificial mejorará mi vida."},
+    {"id": "A2", "text": "Considero que la inteligencia artificial mejorará mi trabajo o mis estudios."},
+    {"id": "A3", "text": "Considero que utilizaré tecnologías de inteligencia artificial en el futuro."},
+    {"id": "A4", "text": "Considero que la inteligencia artificial es positiva para la humanidad."},
+    {"id": "A5", "text": "Considero que la inteligencia artificial es una amenaza para los seres humanos."}
+  ],
   "scenarios": [
     {"id": "E1", "text": "Para tomar una decisión en un conflicto de intereses ...", "belief_id": "C1"},
     {"id": "E3", "text": "Para tomar una decisión en un tema controversial ...", "belief_id": "C1"},

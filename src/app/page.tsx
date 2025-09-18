@@ -9,19 +9,22 @@ import { ResultsStep } from "@/components/survey/ResultsStep";
 import { ScenariosStep } from "@/components/survey/ScenariosStep";
 import { ConsentStep } from "@/components/survey/ConsentStep";
 import { Toaster } from "@/components/ui/toaster";
-import { ClipboardList, Gavel, User, CheckSquare } from "lucide-react";
+import { ClipboardList, Gavel, User, CheckSquare, Smile } from "lucide-react";
+import { AttitudesStep } from "@/components/survey/AttitudesStep";
 
 const surveySteps = [
   { id: 1, name: "Consentimiento", icon: CheckSquare },
-  { id: 2, name: "Creencias", icon: ClipboardList },
-  { id: 3, name: "Escenarios", icon: Gavel },
-  { id: 4, name: "Demografía", icon: User },
+  { id: 2, name: "Actitudes", icon: Smile },
+  { id: 3, name: "Creencias", icon: ClipboardList },
+  { id: 4, name: "Escenarios", icon: Gavel },
+  { id: 5, name: "Demografía", icon: User },
 ];
 
 export default function Home() {
   const [currentStep, setCurrentStep] = useState(1);
   const [surveyData, setSurveyData] = useState({
     startTime: new Date().toISOString(),
+    attitudes: {},
     beliefs: {},
     scenarios: {},
     demographics: {},
@@ -43,6 +46,7 @@ export default function Home() {
   const handleRestart = () => {
     setSurveyData({
       startTime: new Date().toISOString(),
+      attitudes: {},
       beliefs: {},
       scenarios: {},
       demographics: {},
@@ -65,12 +69,14 @@ export default function Home() {
       case 1:
         return <ConsentStep onNext={handleNext} />;
       case 2:
-        return <BeliefsStep updateData={updateSurveyData} onNext={handleNext} initialData={surveyData.beliefs} onBack={handleBack} />;
+        return <AttitudesStep updateData={updateSurveyData} onNext={handleNext} initialData={surveyData.attitudes} onBack={handleBack} />;
       case 3:
-        return <ScenariosStep updateData={updateSurveyData} onNext={handleNext} onBack={handleBack} initialData={surveyData.scenarios} />;
+        return <BeliefsStep updateData={updateSurveyData} onNext={handleNext} initialData={surveyData.beliefs} onBack={handleBack} />;
       case 4:
-        return <DemographicsStep onBack={handleBack} initialData={surveyData.demographics} onFinish={handleFinish} />;
+        return <ScenariosStep updateData={updateSurveyData} onNext={handleNext} onBack={handleBack} initialData={surveyData.scenarios} />;
       case 5:
+        return <DemographicsStep onBack={handleBack} initialData={surveyData.demographics} onFinish={handleFinish} />;
+      case 6:
         return <ResultsStep data={surveyData} onRestart={handleRestart} />;
       default:
         return null;

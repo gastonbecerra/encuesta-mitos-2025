@@ -19,8 +19,9 @@ export function ProgressTracker({ steps, currentStep }: ProgressTrackerProps) {
     <div className="w-full">
       <div className="flex justify-between items-start">
         {steps.map((step, index) => {
-          const isCompleted = currentStep > (index + 1);
-          const isCurrent = currentStep === (index + 1);
+          const stepNumber = index + 1;
+          const isCompleted = currentStep > stepNumber;
+          const isCurrent = currentStep === stepNumber;
           return (
             <div key={step.id} className="relative flex-1 flex flex-col items-center">
               <div className={cn(
