@@ -1,13 +1,13 @@
 {
   "beliefs": [
     {"id": "C1", "text": "Creo que la IA puede tomar decisiones justas y objetivas"},
-    {"id": "C2", "text": "Creo que la IA procesa información sin prejuicios"},
+    {"id": "C2", "text": "Creo que la IA puede procesar información sin prejuicios"},
     {"id": "C3", "text": "Creo que la IA puede ofrecer orientación y atención psicológica"},
     {"id": "C4", "text": "Creo que la IA puede brindar compañía y apoyo emocional"},
     {"id": "C5", "text": "Creo que la IA puede hacer investigación científica"},
     {"id": "C7", "text": "Creo que la IA puede potenciar la creatividad humana"},
     {"id": "C8", "text": "Creo que la IA puede aportar a la inclusión educativa"},
-    {"id": "C9", "text": "Creo que la IA puede enseñar"}
+    {"id": "C9", "text": "Creo que la IA puede enseñar y guiar el aprendizaje"}
   ],
   "scenarios": [
     {"id": "E1", "text": "Para tomar una decisión en un conflicto de intereses ...", "belief_id": "C1"},
@@ -29,6 +29,6 @@
     {"id": "E19", "text": "***** Para incluir a estudiantes con discapacidad ...", "belief_id": "C8"},
     {"id": "E20", "text": "Para adaptar un texto a una lectura fácil ...", "belief_id": "C8"},
     {"id": "E21", "text": "Para enseñar nuevos conocimientos ...", "belief_id": "C9"},
-    {"id": "E22", "text": "Para explicar un ejericio matemático paso a paso ...", "belief_id": "C9"}
+    {"id": "E22", "text": "Para explicar un ejericio paso a paso ...", "belief_id": "C9"}
   ]
 }
