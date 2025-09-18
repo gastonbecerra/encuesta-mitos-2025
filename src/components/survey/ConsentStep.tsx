@@ -16,10 +16,11 @@ export function ConsentStep({ onNext }: ConsentStepProps) {
   return (
     <Card>
       <CardHeader>
-        <CardTitle>Bienvenido/a!</CardTitle>
+        <CardTitle>¡Bienvenido/a!</CardTitle>
         <CardDescription>
           <p className="text-sm text-muted-foreground">
-            Somos un equipo de investigadores de la Universidad de Flores. Estamos estudiando las creencias y actitudes acerca de la inteligencia artificial.
+            Somos un equipo de investigadores de la Licenciatura en Sociología de la Universidad de Flores (Argentina). 
+            Estamos estudiando las creencias y actitudes acerca de la inteligencia artificial.
           </p>
         </CardDescription>
       </CardHeader>
@@ -27,8 +28,13 @@ export function ConsentStep({ onNext }: ConsentStepProps) {
         <div className="space-y-2">
             <h3 className="font-semibold">Participantes</h3>
             <p className="text-sm text-muted-foreground">
-              Esta encuesta está destinada a residentes de Argentina, mayores de 18 años, con o sin conocimientos sobre la inteligencia artificial.
+              Esta encuesta está destinada a:
             </p>
+            <ul className="list-disc list-inside space-y-1 pl-4 text-sm text-muted-foreground">
+              <li>residentes de Argentina</li>
+              <li>mayores de 18 años</li>
+              <li>con o sin conocimientos sobre la inteligencia artificial</li>
+            </ul>
         </div>
         <div className="space-y-2">
             <h3 className="font-semibold">Anonimato de los datos</h3>
