@@ -9,6 +9,7 @@ import { Button } from "@/components/ui/button";
 import { Form, FormControl, FormField, FormItem, FormLabel, FormMessage } from "@/components/ui/form";
 import { Input } from "@/components/ui/input";
 import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from "@/components/ui/select";
+import { Loader2 } from "lucide-react";
 
 const formSchema = z.object({
   age: z.coerce.number().min(13, { message: "Tenés que tener al menos 13 años." }).max(120),
@@ -26,6 +27,7 @@ interface DemographicsStepProps {
   onBack: () => void;
   onFinish: (data: DemographicsData) => void;
   initialData: Partial<DemographicsData>;
+  isSubmitting?: boolean;
 }
 
 const studyAreas = [
@@ -89,7 +91,7 @@ const iaFrequencyOptions = [
 ]
 
 
-export function DemographicsStep({ onBack, onFinish, initialData }: DemographicsStepProps) {
+export function DemographicsStep({ onBack, onFinish, initialData, isSubmitting = false }: DemographicsStepProps) {
   const form = useForm<DemographicsData>({
     resolver: zodResolver(formSchema),
     defaultValues: {
@@ -267,11 +269,11 @@ export function DemographicsStep({ onBack, onFinish, initialData }: Demographics
             />
           </CardContent>
           <CardFooter className="flex justify-between">
-            <Button variant="outline" type="button" onClick={onBack}>
+            <Button variant="outline" type="button" onClick={onBack} disabled={isSubmitting}>
               Volver
             </Button>
-            <Button type="submit">
-              Finalizar
+            <Button type="submit" disabled={isSubmitting}>
+              {isSubmitting ? <Loader2 className="animate-spin" /> : "Finalizar"}
             </Button>
           </CardFooter>
         </form>

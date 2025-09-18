@@ -1,7 +1,7 @@
 "use client";
 
 import { useState } from "react";
-
+import { submitSurvey } from "@/app/actions";
 import { BeliefsStep } from "@/components/survey/BeliefsStep";
 import { DemographicsStep } from "@/components/survey/DemographicsStep";
 import { ProgressTracker } from "@/components/survey/ProgressTracker";
@@ -11,6 +11,7 @@ import { ConsentStep } from "@/components/survey/ConsentStep";
 import { Toaster } from "@/components/ui/toaster";
 import { ClipboardList, Gavel, User, CheckSquare, Smile } from "lucide-react";
 import { AttitudesStep } from "@/components/survey/AttitudesStep";
+import { useToast } from "@/hooks/use-toast";
 
 const surveySteps = [
   { id: 1, name: "Consentimiento", icon: CheckSquare },
@@ -30,6 +31,8 @@ export default function Home() {
     demographics: {},
     completionTimestamp: "",
   });
+  const [isSubmitting, setIsSubmitting] = useState(false);
+  const { toast } = useToast();
 
   const updateSurveyData = (data: object) => {
     setSurveyData((prev) => ({ ...prev, ...data }));
@@ -56,12 +59,31 @@ export default function Home() {
     window.scrollTo(0, 0);
   };
 
-  const handleFinish = (demographicsData: object) => {
-    updateSurveyData({
+  const handleFinish = async (demographicsData: object) => {
+    setIsSubmitting(true);
+    const finalData = {
+      ...surveyData,
       demographics: demographicsData,
       completionTimestamp: new Date().toISOString(),
-    });
-    handleNext();
+    };
+    updateSurveyData(finalData);
+
+    const result = await submitSurvey(finalData);
+
+    if (result.success) {
+      toast({
+        title: "¡Encuesta enviada!",
+        description: "Tus respuestas han sido guardadas. ¡Gracias!",
+      });
+      handleNext();
+    } else {
+      toast({
+        variant: "destructive",
+        title: "Error al enviar",
+        description: "No se pudieron guardar tus respuestas. Por favor, intentá de nuevo.",
+      });
+    }
+    setIsSubmitting(false);
   };
 
   const renderStepContent = () => {
@@ -75,7 +97,7 @@ export default function Home() {
       case 4:
         return <ScenariosStep updateData={updateSurveyData} onNext={handleNext} onBack={handleBack} initialData={surveyData.scenarios} />;
       case 5:
-        return <DemographicsStep onBack={handleBack} initialData={surveyData.demographics} onFinish={handleFinish} />;
+        return <DemographicsStep onBack={handleBack} initialData={surveyData.demographics} onFinish={handleFinish} isSubmitting={isSubmitting} />;
       case 6:
         return <ResultsStep data={surveyData} onRestart={handleRestart} />;
       default:
