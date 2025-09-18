@@ -16,7 +16,7 @@ const formSchema = z.object({
   education: z.string().min(1, { message: "Por favor, seleccioná un nivel educativo." }),
   studyArea: z.string().min(1, { message: "Por favor, seleccioná un área de estudios." }),
   workArea: z.string().min(1, { message: "Por favor, seleccioná un área de desempeño laboral." }),
-  country: z.string().min(2, { message: "Por favor, ingresá un país válido." }),
+  country: z.string().min(1, { message: "Por favor, seleccioná un país." }),
 });
 
 type DemographicsData = z.infer<typeof formSchema>;
@@ -38,7 +38,7 @@ const studyAreas = [
     { value: "ciencias-educacion", label: "Ciencias de la Educación" },
     { value: "comunicacion-periodismo", label: "Comunicación y Periodismo" },
     { value: "informatica-programacion", label: "Informática y Programación" },
-    { value: "otra-no-aplica", label: "Otra / No aplica" },
+    { value: "otra-no-aplica", label: "Otra / No aplica / No estudio" },
 ];
 
 const workAreas = [
@@ -53,6 +53,31 @@ const workAreas = [
     { value: "gobierno-sector-publico", label: "Gobierno y Sector Público" },
     { value: "comunicacion-marketing", label: "Comunicación y Marketing" },
     { value: "otra-no-aplica", label: "Otra / No aplica / No trabajo" },
+];
+
+const countries = [
+    { value: "Argentina", label: "Argentina" },
+    { value: "Bolivia", label: "Bolivia" },
+    { value: "Brasil", label: "Brasil" },
+    { value: "Chile", label: "Chile" },
+    { value: "Colombia", label: "Colombia" },
+    { value: "Costa Rica", label: "Costa Rica" },
+    { value: "Cuba", label: "Cuba" },
+    { value: "Ecuador", label: "Ecuador" },
+    { value: "El Salvador", label: "El Salvador" },
+    { value: "España", label: "España" },
+    { value: "Estados Unidos", label: "Estados Unidos" },
+    { value: "Guatemala", label: "Guatemala" },
+    { value: "Honduras", label: "Honduras" },
+    { value: "México", label: "México" },
+    { value: "Nicaragua", label: "Nicaragua" },
+    { value: "Panamá", label: "Panamá" },
+    { value: "Paraguay", label: "Paraguay" },
+    { value: "Perú", label: "Perú" },
+    { value: "República Dominicana", label: "República Dominicana" },
+    { value: "Uruguay", label: "Uruguay" },
+    { value: "Venezuela", label: "Venezuela" },
+    { value: "Otro", label: "Otro" },
 ];
 
 
@@ -193,9 +218,18 @@ export function DemographicsStep({ onBack, onFinish, initialData }: Demographics
               render={({ field }) => (
                 <FormItem>
                   <FormLabel>País de residencia</FormLabel>
-                  <FormControl>
-                    <Input placeholder="Ej: Argentina" {...field} />
-                  </FormControl>
+                  <Select onValueChange={field.onChange} defaultValue={field.value}>
+                    <FormControl>
+                      <SelectTrigger>
+                        <SelectValue placeholder="Seleccioná tu país" />
+                      </SelectTrigger>
+                    </FormControl>
+                    <SelectContent>
+                      {countries.map(country => (
+                        <SelectItem key={country.value} value={country.value}>{country.label}</SelectItem>
+                      ))}
+                    </SelectContent>
+                  </Select>
                   <FormMessage />
                 </FormItem>
               )}

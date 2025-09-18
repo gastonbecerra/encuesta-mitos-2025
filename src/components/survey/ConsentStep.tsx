@@ -28,12 +28,11 @@ export function ConsentStep({ onNext }: ConsentStepProps) {
         <div className="space-y-2">
             <h3 className="font-semibold">Participantes</h3>
             <p className="text-sm text-muted-foreground">
-              Esta encuesta está destinada a:
+              Esta encuesta está destinada a personas:
             </p>
             <ul className="list-disc list-inside space-y-1 pl-4 text-sm text-muted-foreground">
-              <li>residentes de Argentina</li>
               <li>mayores de 18 años</li>
-              <li>con o sin conocimientos sobre la inteligencia artificial</li>
+              <li>que usaron herramientas de IA en los últimos 12 meses en su estudio o trabajo</li>
             </ul>
         </div>
         <div className="space-y-2">
